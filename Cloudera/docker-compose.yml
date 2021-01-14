@@ -1,11 +1,10 @@
 version: '2'
 services:
   cloudera:
-    contrainer_name: cloudera
-    host_name: cloudera 
     image: cloudera/quickstart:latest
     privileged: true
     hostname: quickstart.cloudera
+    container_name: quickstart.cloudera
     command: /usr/bin/docker-quickstart
     ports:
       - "8020:8020"   # HDFS 
