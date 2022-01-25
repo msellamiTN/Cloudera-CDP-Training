@@ -28,6 +28,7 @@ services:
       - "7077:7077"   # Spark Master
       - "3306:3306"   # MYSQL 
       - "10000:10000" # HiveServer
+      - "21050:21050" # Impala
     tty: true
     stdin_open: true
     volumes: 
