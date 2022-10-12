@@ -1,7 +1,7 @@
 version: '2'
 services:
   cloudera:
-    image: cloudera/quickstart:latest
+    image: msellami/cloudera-quickstart:latest
     privileged: true
     hostname: quickstart.cloudera
     container_name: quickstart.cloudera
