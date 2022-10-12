@@ -26,7 +26,7 @@ COPY hdfs-read.py /app/
 EXPOSE 80
 
 # When the container starts, run this
-ENTRYPOINT python hdfs-write.py
+ENTRYPOINT python hdfs-read.py
 
 
 
