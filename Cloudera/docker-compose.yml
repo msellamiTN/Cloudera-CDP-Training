@@ -34,14 +34,14 @@ services:
     volumes: 
       - /var/shared_cloudera_quickstart:/media/shared_from_local
 
-  portainer:
-    image: portainer/portainer-ce:latest
-    restart: always
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./portainer-data:/data
-        # Enable you to access potainers web interface from your host machine
-        # using https://localhost:9443
-    ports:
-      - "8000:8000"
-      - "9443:9443"
+#  portainer:
+#    image: portainer/portainer-ce:latest
+#    restart: always
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+#      - ./portainer-data:/data
+#        # Enable you to access potainers web interface from your host machine
+#        # using https://localhost:9443
+#    ports:
+#      - "8000:8000"
+#      - "9443:9443"
