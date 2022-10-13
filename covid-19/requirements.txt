@@ -1,0 +1,5 @@
+hdfs
+avro
+pandas
+numpy
+fastavro
