@@ -35,7 +35,7 @@ services:
       - /var/shared_cloudera_quickstart:/media/shared_from_local
 
   hdfs-client:
-    image: msellami/hdfs-client:latest
+    image: /msellami/hdfs-covid:latest
     restart: always
     volumes:
      - /var/data:/media/shared_from_local
