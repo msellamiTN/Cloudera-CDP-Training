@@ -1,4 +1,3 @@
-version: '2'
 services:
   cloudera:
     image: msellami/cloudera-quickstart:latest
