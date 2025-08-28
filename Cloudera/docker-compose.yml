@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   cloudera:
     image: msellami/cloudera-quickstart:latest
@@ -5,31 +7,37 @@ services:
     hostname: quickstart.cloudera
     container_name: quickstart.cloudera
     command: /usr/bin/docker-quickstart
-    ports:
-      - "8020:8020"   # HDFS 
-      - "8022:22"     # SSH
-      - "7180:7180"   # Cloudera Manager
-      - "8888:8888"   # Hue
-      - "11000:11000" # Oozie
-      - "50070:50070" # HDFS Rest Namenode
-      - "50075:50075" # HDFS Rest Datanode
-      - "2182:2181"   # Zookeeper
-      - "8088:8088"   # YARN Resource Manager
-      - "19888:19888" # MapReduce Job History
-      - "50030:50030" # MapReduce Job Tracker
-      - "8983:8983"   # Solr
-      - "16000:16000" # Sqoop Metastore
-      - "8042:8042"   # YARN Node Manager
-      - "60010:60010" # HBase Master
-      - "60030:60030" # HBase Region
-      - "9090:9090"   # HBase Thrift
-      - "8080:8080"   # HBase Rest
-      - "7077:7077"   # Spark Master
-      - "3306:3306"   # MYSQL 
-      - "10000:10000" # HiveServer
-      - "21050:21050" # Impala
     tty: true
     stdin_open: true
+    mem_limit: 8g
+    memswap_limit: 8g
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+    ports:
+      - "8020:8020"     # HDFS 
+      - "8022:22"       # SSH
+      - "7180:7180"     # Cloudera Manager
+      - "8888:8888"     # Hue
+      - "11000:11000"   # Oozie
+      - "50070:50070"   # HDFS Rest Namenode
+      - "50075:50075"   # HDFS Rest Datanode
+      - "2181:2181"     # Zookeeper
+      - "8088:8088"     # YARN Resource Manager
+      - "19888:19888"   # MapReduce Job History
+      - "50030:50030"   # MapReduce Job Tracker
+      - "8983:8983"     # Solr
+      - "16000:16000"   # Sqoop Metastore
+      - "8042:8042"     # YARN Node Manager
+      - "60010:60010"   # HBase Master
+      - "60030:60030"   # HBase Region
+      - "9090:9090"     # HBase Thrift
+      - "8080:8080"     # HBase Rest
+      - "7077:7077"     # Spark Master
+      - "3306:3306"     # MySQL 
+      - "10000:10000"   # HiveServer
+      - "21050:21050"   # Impala
     volumes: 
       - /var/shared_cloudera_quickstart:/media/shared_from_local
 
@@ -37,15 +45,14 @@ services:
     image: msellami/hdfs-covid:latest
     restart: always
     volumes:
-     - /var/data:/media/shared_from_local
+      - /var/data:/media/shared_from_local
+
   portainer:
     image: portainer/portainer-ce:latest
     restart: always
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./portainer-data:/data
-        # Enable you to access potainers web interface from your host machine
-        # using https://localhost:9443
     ports:
       - "8000:8000"
       - "9443:9443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./portainer-data:/data
