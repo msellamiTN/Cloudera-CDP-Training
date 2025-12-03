@@ -40,7 +40,7 @@ services:
       - "21050:21050"   # Impala
     volumes: 
       - /var/shared_cloudera_quickstart:/media/shared_from_local
-
+      - /cloudera_data:/home/cloudera/cloudera_data
   hdfs-client:
     image: msellami/hdfs-covid:latest
     restart: always
