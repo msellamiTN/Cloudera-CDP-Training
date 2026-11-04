@@ -1,0 +1,31 @@
+services:
+  api:
+    build:
+      context: ./streamlit-lab
+      dockerfile: Dockerfile.api
+    container_name: dataco-api
+    restart: unless-stopped
+    environment:
+      HBASE_THRIFT_HOST: cloudera
+      HBASE_THRIFT_PORT: "9090"
+      HBASE_TABLE: product_analytics
+    ports:
+      - "8001:8001"
+    depends_on:
+      - cloudera
+    networks:
+      - default
+  streamlit:
+    build:
+      context: ./streamlit-lab
+      dockerfile: Dockerfile.streamlit
+    container_name: dataco-streamlit
+    restart: unless-stopped
+    environment:
+      API_URL: http://api:8001
+    ports:
+      - "8501:8501"
+    depends_on:
+      - api
+    networks:
+      - default
