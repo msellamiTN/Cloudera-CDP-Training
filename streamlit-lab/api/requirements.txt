@@ -1,0 +1,4 @@
+fastapi==0.115.12
+uvicorn[standard]==0.34.2
+happybase==1.2.0
+thrift==0.16.0
