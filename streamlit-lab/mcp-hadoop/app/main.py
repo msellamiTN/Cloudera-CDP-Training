@@ -298,12 +298,13 @@ async def lifespan(_: FastAPI):
 
 app = FastAPI(title=APP_NAME, version="0.2.0", lifespan=lifespan,
               description="Standalone MCP gateway for HDFS, YARN, HBase, Hive and Impala.")
-# The MCP app is mounted at /mcp, so its internal endpoint must be /.
-# Otherwise FastMCP's default /mcp path is nested and exposed as /mcp/mcp.
-app.mount("/mcp", mcp.streamable_http_app(streamable_http_path="/"))
-
-
 @app.get("/health")
 def health():
     return {"status": "ok", "service": APP_NAME, "mcp_endpoint": "/mcp",
             "tool_groups": ["hdfs", "yarn", "hbase", "hive", "impala"]}
+
+
+# MCP SDK 1.30.0 serves its Streamable HTTP handler at the internal /mcp path.
+# Mount at the root AFTER /health so the external endpoint remains /mcp
+# without producing the invalid nested /mcp/mcp route.
+app.mount("/", mcp.streamable_http_app())
