@@ -42,15 +42,14 @@ The `engine` argument is `hive` or `impala`. The service deliberately does not e
 
 ## Run
 
-From this directory:
+From the repository root (the same Compose project that starts `cloudera`):
 
-1. Copy `.env.example` to `.env`.
-2. Set `IMPALA_HOST` and `HIVE_HOST` to the hostname/IP reachable from the container. Do not assume `quickstart.cloudera` resolves outside the Docker network.
-3. Ensure the Docker network in `docker-compose.yml` exists and is the same network as the Hadoop services. If using a different network, update the compose network name.
-4. Start:
+1. Review the Hadoop connection settings in `docker-compose.hadoop-mcp.override.yml`.
+2. The overlay attaches MCP to the same Compose default network as the `cloudera` service, so `quickstart.cloudera` resolves through the Compose service network.
+3. Start both the base Hadoop stack and the MCP overlay:
 
 ```bash
-docker compose up --build -d
+docker compose -f docker-compose.yml -f docker-compose.hadoop-mcp.override.yml up --build -d
 docker compose logs -f hadoop-mcp
 curl http://localhost:8002/health
 ```
@@ -65,7 +64,7 @@ Typical CDH 5.x defaults are Impala Daemon TCP 21050 and HiveServer2 TCP 10000. 
 netstat -lntp 2>/dev/null | egrep '21050|10000'
 ```
 
-If MCP runs in a separate Docker network, use a routable host address or attach it to the Hadoop container's network. A successful `/health` response verifies only the web process, not Hive/Impala connectivity. Test both engines through MCP tools.
+When running MCP outside this Compose project, use a routable host address and ensure the Hadoop ports are published and reachable. A successful `/health` response verifies only the web process, not Hive/Impala connectivity. Test both engines through MCP tools.
 
 ## Safety and operational notes
 
