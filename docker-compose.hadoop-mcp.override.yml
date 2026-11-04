@@ -16,6 +16,10 @@ services:
       HIVE_DATABASE: default
       HIVE_USER: cloudera
       HIVE_AUTH_MECHANISM: NONE
+      HBASE_THRIFT_HOST: quickstart.cloudera
+      HBASE_THRIFT_PORT: "9090"
+      HDFS_WEBHDFS_URL: http://quickstart.cloudera:50070
+      YARN_RESOURCE_MANAGER_URL: http://quickstart.cloudera:8088
       MCP_DEFAULT_LIMIT: "100"
       MCP_MAX_LIMIT: "1000"
     ports:
