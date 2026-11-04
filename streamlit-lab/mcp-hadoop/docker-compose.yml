@@ -1,0 +1,23 @@
+services:
+  hadoop-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dataco-hadoop-mcp
+    env_file:
+      - .env
+    ports:
+      - "8002:8002"
+    restart: unless-stopped
+    networks:
+      - dataco
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8002/health', timeout=3)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+networks:
+  dataco:
+    external: true
+    name: dataco_default
