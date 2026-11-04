@@ -1,0 +1,26 @@
+services:
+  hadoop-mcp:
+    build:
+      context: ./streamlit-lab/mcp-hadoop
+      dockerfile: Dockerfile
+    container_name: dataco-hadoop-mcp
+    restart: unless-stopped
+    environment:
+      IMPALA_HOST: quickstart.cloudera
+      IMPALA_PORT: "21050"
+      IMPALA_DATABASE: default
+      IMPALA_USER: cloudera
+      IMPALA_AUTH_MECHANISM: PLAIN
+      HIVE_HOST: quickstart.cloudera
+      HIVE_PORT: "10000"
+      HIVE_DATABASE: default
+      HIVE_USER: cloudera
+      HIVE_AUTH_MECHANISM: NONE
+      MCP_DEFAULT_LIMIT: "100"
+      MCP_MAX_LIMIT: "1000"
+    ports:
+      - "8002:8002"
+    depends_on:
+      - cloudera
+    networks:
+      - default
