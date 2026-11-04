@@ -84,7 +84,7 @@ The same seven SQL discovery and query tools support `engine=impala`. Impala is 
 |---|---|
 | `hadoop_service_endpoints` | Show the configured service endpoints |
 
-**Total: 22 MCP tools** across HDFS, YARN, HBase, Hive, Impala and endpoint diagnostics. Hive and Impala share the same seven tool definitions, selected through the `engine` parameter.
+**Total: 18 MCP tool definitions** across HDFS, YARN, HBase, Hive, Impala and endpoint diagnostics. Hive and Impala share the same seven tool definitions, selected through the `engine` parameter.
 
 ## 4. Independent deployment
 
